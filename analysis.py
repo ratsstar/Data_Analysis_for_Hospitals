@@ -23,7 +23,7 @@ df = df.dropna(how='all')
 # Correct all the gender column values to f and m respectively
 df['gender'] = df['gender'].map({'female': 'f', 'male': 'm', 'woman': 'f', 'man': 'm'}, na_action='ignore')
 # Replace the NaN values in the gender column of the prenatal hospital with f
-df['gender'] = df['gender'].fillna('f')
+df.gender.where(((df.hospital != 'prenatal') & (df.gender != None)), other='f', inplace=True)
 # Replace the NaN values in the bmi, diagnosis, blood_test, ecg, ultrasound, mri,
 # xray, children, months columns with zeros
 c = ['bmi', 'diagnosis', 'blood_test', 'ecg', 'ultrasound', 'mri', 'xray', 'children', 'months']
